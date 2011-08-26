@@ -12,16 +12,7 @@ ebins:
 
 clean:
 	rm -f tmp/*.cov.html erl_crash.dumpg
-	rm -rf ebin
+	rm -f ebin/*.beam
 
-test:
-	erl -pa ebin -noshell -s cucumberl test -s init stop
-
-sample:
-	erl -pa ebin -noshell -s sample main -s init stop
-
-sample_more:
-	erl -pa ebin -noshell -s sample_more main -s init stop
-
-sample_table:
-	erl -pa ebin -noshell -s sample_table main -s init stop
+test: clean ebins
+	erl -pa ebin -noshell -sname tester -s testing_suite test_auto -s init stop
